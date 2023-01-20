@@ -24,10 +24,25 @@
 
 Отлично! Персонажа создали, теперь выводим его на экран:
 
+Для начала в файле `class_controller.py` импортируем класс игрока:
+
+    from class_player import *
+    ...
+
+Далее при инициализации контроллера создаем объект класса игрока
+
+    def __init__(self):
+        ...
+        # Создаем в контроллере объект класса игрока
+        self.player = Player()
+
 В файле `class_gui.py` запишем вывод персонажа в функци `update`:
 
         ...
-        # Рисуем персонажа и объекты
-        self.screen.blit(self.controller.player.sprite.image, self.controller.player.sprite)
+        # Рисуем персонажа по его координатам
+        self.screen.blit(self.controller.player.sprite.image, (self.controller.player.x, self.controller.player.y))
 
         pygame.display.update()
+
+# Урок 3.1 – Располагаем игрока по стартовым координатам уровня.
+

@@ -30,7 +30,7 @@ class Gui:
             if e.type == pygame.QUIT:
                 exit()
 
-        # Рисуем персонажа и объекты
-        self.screen.blit(self.controller.player.sprite.image, self.controller.player.sprite)
+        # Рисуем персонажа по его координатам
+        self.screen.blit(self.controller.player.sprite.image, (self.controller.player.x, self.controller.player.y))
 
         pygame.display.update()

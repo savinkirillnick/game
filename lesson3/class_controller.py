@@ -1,4 +1,5 @@
 from class_gui import *
+from class_player import *
 import json
 
 
@@ -7,6 +8,9 @@ class Controller:
         self.width = 16
         self.height = 9
         self.tile = 24
+
+        # Создаем в контроллере объект класса игрока
+        self.player = Player()
 
         with open("data/level.json") as file:
             self.level = json.load(file)
