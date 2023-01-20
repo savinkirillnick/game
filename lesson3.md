@@ -1,0 +1,33 @@
+# Урок 3 – Игрок.
+Для хранения настроек игрока обработки событий создадим отдельный класс.
+
+Для этого создадим файл `class_player.py` и запишем в него следующее:
+
+
+    import pygame
+
+    
+    class Player:
+        def __init__(self):
+            # Задаем координаты, по которым стоит персонаж
+            self.x = 0
+            self.y = 0
+            # Задаем размер тайла героя
+            self.width = 40
+            self.height = 48
+            # Создаем спрайт персонажа
+            self.sprite = pygame.sprite.Sprite()
+            # Создаем квадратик размерами тайла персонажа
+            self.sprite.image = pygame.Surface((self.width, self.height))
+            # Задаем цвет тайла
+            self.sprite.image.fill(pygame.Color("#00FF19"))
+
+Отлично! Персонажа создали, теперь выводим его на экран:
+
+В файле `class_gui.py` запишем вывод персонажа в функци `update`:
+
+        ...
+        # Рисуем персонажа и объекты
+        self.screen.blit(self.controller.player.sprite.image, self.controller.player.sprite)
+
+        pygame.display.update()
