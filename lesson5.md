@@ -76,7 +76,7 @@
         # Изменяем создание игрока
         self.player = Player(self)
 
-А в классе `Player` прописывааем:
+А в классе `Player` принимаем объект контроллер и прописывааем:
 
     def __init__(self, controller):
         self.controller = controller
