@@ -9,7 +9,6 @@ class Controller:
         self.width = 16
         self.height = 9
         self.tile = 24
-        # Изменяем создание игрока
         self.player = Player(self)
 
         with open("data/level.json") as file:
@@ -20,54 +19,35 @@ class Controller:
         self.gui = Gui(self)
 
     def collisions_obstacles(self, dx, dy):
-        # начальный и конечный столбец
-        # сразу проверяем, что начальный столбец не отрицательный, а конечный столбец не больше, чем размер уровня
         c1 = max(self.player.x // self.tile - 1, 0)
         c2 = min((self.player.x + self.player.width) // self.tile + 1, len(self.level['obstacles'][0]) - 1)
 
-        # начальная и конечная строка
-        # аналогично проверяем строки
-        r1 = max(self.player.y // self.tile - 1, 0)
+        r1 = max((self.player.y + self.player.height - self.player.step) // self.tile - 1, 0)
         r2 = min((self.player.y + self.player.height) // self.tile + 1, len(self.level['obstacles']) - 1)
 
         for y in range(r1, r2 + 1):
             for x in range(c1, c2 + 1):
-                # Если на карте по конкретным координатам стоит 0, т.е. препятствие отсутствует, то пропускаем итерацию
                 if self.level['obstacles'][y][x] == 0:
                     continue
 
-                # Если там стоит препятствие (или единица), проводим следующие расчеты
-                # Столкновения будем высчитывать внутренними методами pygame:
-                # Будем рисовать два прямоугольника - прямоугольник стены и прямоугольник игрока
-                # и будем проверять их перекрытие
-
-                # Определяем начальные координаты стены (координаты верхнего левого угла)
                 left = x * self.tile
                 top = y * self.tile
 
-                # создаем спрайт стены по данным координатам в виде прямоугоника с размерами тайла
                 tile_sprite = pygame.sprite.Sprite()
                 tile_sprite.rect = pygame.Rect(left, top, self.tile, self.tile)
-                # создаем спрайт персонажа по координатам игрока в виде прямоугольника с размерами игрока
                 player_sprite = pygame.sprite.Sprite()
-                player_sprite.rect = pygame.Rect(self.player.x, self.player.y,
+                player_sprite.rect = pygame.Rect(self.player.x, self.player.y + self.player.height - self.player.step,
                                                  self.player.width, self.player.height)
 
                 if pygame.sprite.collide_rect(player_sprite, tile_sprite):
-                    # Если пересечение с препятствием произошло, проверям в какую сторону мы шли,
-                    # чтобы в противоположную отпрыгнуть
                     if dx > 0:
-                        # Если шли вправо, то координата x игрока будет на ширину игрока левее, чем тайл стены
                         self.player.x = left - self.player.width
                     if dx < 0:
-                        # Если шли влево, то координата x игрока будет на ширину тайла стены правее
                         self.player.x = left + self.tile
                     if dy > 0:
-                        # Если шли вниз, то координата y игрока будет на высоту игрока выше, чем тайл стены
                         self.player.y = top - self.player.height
                     if dy < 0:
-                        # Если шли вверх, то координата y игрока будет на высоту тайла стены ниже
-                        self.player.y = top + self.tile
+                        self.player.y = top + self.tile - self.player.height + self.player.step
 
     def run(self):
 

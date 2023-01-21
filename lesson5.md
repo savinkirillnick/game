@@ -100,5 +100,39 @@
 
 ---
 
+# Урок 5.1 – Отделяем ноги
+Можно было бы оставить и так, но по причине того, что персонаж не плоский как паук, а высокий, то с учетом перспективы отображения, спрайт персонажа может пересекать спрайт стены на величину тела. Тем самым обработка столкновений будет проводиться по ногам.
 
+В классе `Player` создадим высоту для ног
 
+    class Player:
+        def __init__(self, controller):
+            self.step = 16
+            ...
+
+Теперь внесем поправки в функции расчета столкновений класса `Controller`, чтобы расчет шел не от головы игрока, а от ног:
+
+    def collisions_obstacles(self, dx, dy):
+        ...
+        r1 = max((self.player.y + self.player.height - self.player.step) // self.tile - 1, 0)
+        ...
+        for y ...
+            for x ...
+                player_sprite.rect = pygame.Rect(self.player.x, self.player.y + self.player.height - self.player.step,
+                                                 self.player.width, self.player.height)
+                ...
+                if pygame.sprite.collide_rect ...
+                    if dy < 0:
+                        self.player.y = top + self.tile - self.player.height + self.player.step
+
+Теперь если запустить `main.py` все должно заработать в приятной глазу картинке.
+
+---
+
+### Работа над ошибками
+
+Если заметили, то когда мы рисуем спрайт игрока и сравниваем его со спрайтом стены, то высоту надо задавать уже по высоте ног, а не полной высоты игрока:
+
+    player_sprite.rect = pygame.Rect(self.player.x, self.player.y + self.player.height - self.player.step,
+                                     self.player.width, self.player.step)
+                
