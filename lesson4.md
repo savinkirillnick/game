@@ -116,6 +116,8 @@
         self.x += self.dx
         self.y += self.dy
 
+![Результат](/images/4-0-1.jpg)
+
 ---
 
 # Урок 4.0 – Замедление.
