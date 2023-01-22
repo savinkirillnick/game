@@ -38,4 +38,14 @@ class Gui:
                     continue
                 self.screen.blit(tile_sprite.image, (tile_sprite.rect.x, tile_sprite.rect.y))
 
+        # Рисуем HUD
+        # Получаем список элементов
+        hud = self.controller.get_hud()
+        # настраиваем шрифт
+        f1 = pygame.font.Font(None, 14)
+        # выводим все элементы на экран
+        for item in hud:
+            text = f1.render(item[2], True, (255, 255, 255))
+            self.screen.blit(text, (item[0], item[1]))
+
         pygame.display.update()

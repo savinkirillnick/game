@@ -16,6 +16,13 @@ class Controller:
         self.level = dict()
         self.load_level()
 
+    def get_hud(self):
+        arr = list()
+        arr.append([10, 10, "x: "+str(self.player.sprite.rect.x)])
+        arr.append([10, 20, "y: "+str(self.player.sprite.rect.y)])
+        arr.append([10, 30, "fps: "+str(self.clock.get_fps()//1)])
+        return arr
+
     # Функция загрузки уровня
     def load_level(self):
         # открываем файл настройки уровня для чтения и считываем нужные переменные

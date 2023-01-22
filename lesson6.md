@@ -94,7 +94,7 @@
 ![Картинка](/lesson6/data/images/level_1/wall_12.png)
 ![Картинка](/lesson6/data/images/level_1/wall_13.png)
 
-После того, как скопировали картинки в свою папку, надо в файле `level.json` описать их:
+После того как скопировали картинки в свою папку, надо в файле `level.json` описать их:
 Пишем:
 
     {
@@ -289,6 +289,32 @@
 При запуске получим более живую картинку. Теперь игрок может прятаться за выступами
 
 ![Результат](/images/6-0-3.jpg)
+
+Еще можно вывести в слой `hud` информацию о позиции игрока и fps.
+
+Для этого в класе Controller создадим метод `get_hud`, который будет собирать всю инфу и выводить в список:
+
+    def get_hud(self):
+        arr = list()
+        arr.append([10, 10, "x: "+str(self.player.sprite.rect.x)])
+        arr.append([10, 20, "y: "+str(self.player.sprite.rect.y)])
+        arr.append([10, 30, "fps: "+str(self.clock.get_fps()//1)])
+        return arr
+
+А в классе `Gui`, методе `update`, в последнюю очередь выводим `hud`:
+
+        ...
+        # Рисуем HUD
+        # Получаем список элементов
+        hud = self.controller.get_hud()
+        # настраиваем шрифт
+        f1 = pygame.font.Font(None, 14)
+        # выводим все элементы на экран
+        for item in hud:
+            text = f1.render(item[2], True, (255, 255, 255))
+            self.screen.blit(text, (item[0], item[1]))
+
+        pygame.display.update()
 
 ---
 
