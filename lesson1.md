@@ -52,7 +52,9 @@
         controller = Controller()
         controller.run()
 
- Запускаем `main.py` и получаем черное окно.
+Запускаем `main.py` и получаем черное окно.
+
+![Черное окно](/images/1-0-1.jpg)
 
 ---
 
