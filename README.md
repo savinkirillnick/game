@@ -19,3 +19,4 @@
 3. [Игрок. Стартовые координаты](https://github.com/savinkirillnick/game/blob/main/lesson3.md)
 4. [Движения игрока и прыжки](https://github.com/savinkirillnick/game/blob/main/lesson4.md)
 5. [Обработка столкновений](https://github.com/savinkirillnick/game/blob/main/lesson5.md)
+6. [Наложение текстур](https://github.com/savinkirillnick/game/blob/main/lesson6.md)

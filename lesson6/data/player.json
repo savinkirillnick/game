@@ -1,0 +1,6 @@
+{
+  "player": "data/images/player/player.png",
+  "width": 32,
+  "height": 48,
+  "step": 16
+}
